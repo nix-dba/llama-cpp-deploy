@@ -1,0 +1,24 @@
+services:
+  llama:
+    image: "ghcr.io/ggml-org/llama.cpp:server-cuda12@sha256:f74f5805191a8030bff26e2a7890d737fc2b5d0931220c953d25e1b7d7613ef5"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: cdi
+              capabilities: [gpu]
+              device_ids:
+              - nvidia.com/gpu=all
+    ports:
+      - "8080:8080"
+    ipc: host
+    volumes:
+    - ./models:/models
+    - ./config.ini:/models/config.ini:ro
+    command:
+      - --port
+      - 8080
+      - --host
+      - 0.0.0.0
+      - --models-preset
+      - /models/config.ini
