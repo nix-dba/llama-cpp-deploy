@@ -16,7 +16,7 @@ services:
     - ./config.ini:/models/config.ini:ro
     command:
       - --port
-      - 8080
+      - "8080"
       - --host
       - 0.0.0.0
       - --models-preset
