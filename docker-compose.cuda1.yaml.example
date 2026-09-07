@@ -11,6 +11,8 @@ services:
     ports:
       - "8080:8080"
     ipc: host
+    environment:
+      LLAMA_CACHE: "/models"
     volumes:
     - ./models:/models
     - ./config.ini:/models/config.ini:ro
